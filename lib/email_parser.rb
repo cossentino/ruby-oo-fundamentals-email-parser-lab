@@ -13,23 +13,17 @@ class EmailAddressParser
     def initialize(email_string)
         @email_string = email_string
     end
-
-    def delimiter
-        if @email_string.include?(",")
-            @delimiter = ", "
-        else
-            @delimiter = " "
-        end
-    end
     
     def parse
-        delimiter
-        email_array = @email_string.split(@delimiter)
+        clean_str = @email_string.tr(",", "")
+        email_array = clean_str.split(" ")
         email_array_set = email_array.to_set
         email_array_dup_removed = email_array_set.to_a
-        email_array
+        email_array_dup_removed
     end
 end
 
+#test_string = "avi@test.com, arel@test.com, avi@test.coo"
 
-test = EmailAddressParser.new("john@doe.com, person@somewhere.org")
+#test = EmailAddressParser.new(test_string)
+#puts test.parse
